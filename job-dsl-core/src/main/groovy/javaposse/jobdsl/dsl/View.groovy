@@ -1,9 +1,11 @@
 package javaposse.jobdsl.dsl
 
+import javaposse.jobdsl.dsl.helpers.Context
+
 /**
  * DSL element representing a Jenkins view.
  */
-abstract class View {
+abstract class View implements Context {
     private final List<WithXmlAction> withXmlActions = []
 
     String name

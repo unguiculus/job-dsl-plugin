@@ -1,5 +1,6 @@
 package javaposse.jobdsl.dsl.helpers.common
 
+import javaposse.jobdsl.dsl.DslContext
 import javaposse.jobdsl.dsl.helpers.ContextHelper
 import javaposse.jobdsl.dsl.helpers.Context
 
@@ -9,21 +10,23 @@ class DownstreamContext implements Context {
 
     private final List<DownstreamTriggerContext> triggers = []
 
-    void trigger(String projects, Closure downstreamTriggerClosure = null) {
+    void trigger(String projects, @DslContext(DownstreamTriggerContext) Closure downstreamTriggerClosure = null) {
         trigger(projects, null, downstreamTriggerClosure)
     }
 
-    void trigger(String projects, String condition, Closure downstreamTriggerClosure = null) {
+    void trigger(String projects, String condition,
+                 @DslContext(DownstreamTriggerContext) Closure downstreamTriggerClosure = null) {
         trigger(projects, condition, false, downstreamTriggerClosure)
     }
 
     void trigger(String projects, String condition, boolean triggerWithNoParameters,
-                Closure downstreamTriggerClosure = null) {
+                 @DslContext(DownstreamTriggerContext) Closure downstreamTriggerClosure = null) {
         trigger(projects, condition, triggerWithNoParameters, [:], downstreamTriggerClosure)
     }
 
     void trigger(String projects, String condition, boolean triggerWithNoParameters,
-                Map<String, String> blockingThresholds, Closure downstreamTriggerClosure = null) {
+                 Map<String, String> blockingThresholds,
+                 @DslContext(DownstreamTriggerContext) Closure downstreamTriggerClosure = null) {
         DownstreamTriggerContext downstreamTriggerContext = new DownstreamTriggerContext()
         downstreamTriggerContext.projects = projects
         downstreamTriggerContext.condition = condition ?: 'SUCCESS'

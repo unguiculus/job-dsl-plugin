@@ -1,5 +1,6 @@
 package javaposse.jobdsl.dsl.views
 
+import javaposse.jobdsl.dsl.DslContext
 import javaposse.jobdsl.dsl.helpers.Context
 
 import static com.google.common.base.Preconditions.checkArgument
@@ -29,11 +30,11 @@ class ListViewSectionContext implements Context {
         this.alignment = alignment
     }
 
-    void jobs(Closure jobsClosure) {
+    void jobs(@DslContext(JobsContext) Closure jobsClosure) {
         executeInContext(jobsClosure, jobsContext)
     }
 
-    void columns(Closure columnsClosure) {
+    void columns(@DslContext(ColumnsContext) Closure columnsClosure) {
         executeInContext(columnsClosure, columnsContext)
     }
 }

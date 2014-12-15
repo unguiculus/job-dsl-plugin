@@ -1,6 +1,8 @@
 package javaposse.jobdsl.dsl
 
-abstract class Item {
+import javaposse.jobdsl.dsl.helpers.Context
+
+abstract class Item implements Context {
     String name
 
     List<WithXmlAction> withXmlActions = []

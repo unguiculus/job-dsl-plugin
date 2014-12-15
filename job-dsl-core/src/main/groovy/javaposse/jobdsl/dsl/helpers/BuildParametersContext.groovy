@@ -1,5 +1,7 @@
 package javaposse.jobdsl.dsl.helpers
 
+import javaposse.jobdsl.dsl.DslContext
+
 import static com.google.common.base.Preconditions.checkNotNull
 import static com.google.common.base.Preconditions.checkArgument
 
@@ -221,7 +223,7 @@ class BuildParametersContext implements Context {
      * @param description (optional)
      * @return
      */
-    void nodeParam(String parameterName, Closure nodeParamClosure = null) {
+    void nodeParam(String parameterName, @DslContext(NodeParamContext) Closure nodeParamClosure = null) {
         checkArgument(!buildParameterNodes.containsKey(parameterName), 'parameter $parameterName already defined')
         checkNotNull(parameterName, 'parameterName cannot be null')
         checkArgument(parameterName.length() > 0)

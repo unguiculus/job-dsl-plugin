@@ -1,5 +1,6 @@
 package javaposse.jobdsl.dsl.helpers.step
 
+import javaposse.jobdsl.dsl.DslContext
 import javaposse.jobdsl.dsl.JobManagement
 import javaposse.jobdsl.dsl.helpers.ContextHelper
 import javaposse.jobdsl.dsl.helpers.Context
@@ -26,15 +27,17 @@ class PhaseContext implements Context {
         this.continuationCondition = continuationCondition
     }
 
-    void job(String jobName, Closure phaseJobClosure = null) {
+    void job(String jobName, @DslContext(PhaseJobContext) Closure phaseJobClosure = null) {
         job(jobName, true, true, phaseJobClosure)
     }
 
-    void job(String jobName, boolean currentJobParameters, Closure phaseJobClosure = null) {
+    void job(String jobName, boolean currentJobParameters,
+             @DslContext(PhaseJobContext) Closure phaseJobClosure = null) {
         job(jobName, currentJobParameters, true, phaseJobClosure)
     }
 
-    void job(String jobName, boolean currentJobParameters, boolean exposedScm, Closure phaseJobClosure = null) {
+    void job(String jobName, boolean currentJobParameters, boolean exposedScm,
+             @DslContext(PhaseJobContext) Closure phaseJobClosure = null) {
         PhaseJobContext phaseJobContext = new PhaseJobContext(jobManagement, jobName, currentJobParameters, exposedScm)
         ContextHelper.executeInContext(phaseJobClosure, phaseJobContext)
 
